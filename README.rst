@@ -86,10 +86,10 @@ Getting started
 
 3. analyse output files: 
 
-  * filename.txt_out.pdf contains a plot, 
-  * filename.txt_out_gauss contain the ultranest analyses output assuming a Gaussian distribution.
-  * filename.txt_out_flexN contain the ultranest analyses output assuming a histogram model.
-  * The directories include diagnostic plots, corner plots and posterior samples of the distribution parameters.
+* filename.txt_out.pdf contains a plot, 
+* filename.txt_out_gauss contain the ultranest analyses output assuming a Gaussian distribution.
+* filename.txt_out_flexN contain the ultranest analyses output assuming a histogram model.
+* The directories include diagnostic plots, corner plots and posterior samples of the distribution parameters.
 
 With these output files, you can:
 
