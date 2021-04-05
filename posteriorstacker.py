@@ -22,27 +22,27 @@ The output is plotted.
 import numpy as np
 import matplotlib.pyplot as plt
 import ultranest, ultranest.stepsampler
-import scipy.stats
 import argparse
+import sys
 
 class HelpfulParser(argparse.ArgumentParser):
-	def error(self, message):
-		sys.stderr.write('error: %s\n' % message)
-		self.print_help()
-		sys.exit(2)
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
 
 parser = HelpfulParser(description=__doc__,
-	epilog="""Johannes Buchner (C) 2020 <johannes.buchner.acad@gmx.com>""",
-	formatter_class=argparse.RawTextHelpFormatter)
+    epilog="""Johannes Buchner (C) 2020 <johannes.buchner.acad@gmx.com>""",
+    formatter_class=argparse.RawTextHelpFormatter)
 
-parser.add_argument('filename', type=str, 
+parser.add_argument('filename', type=str,
                     help="Filename containing posterior samples, one object per line")
 parser.add_argument("low", type=float,
-					help="Lower end of the distribution")
+                    help="Lower end of the distribution")
 parser.add_argument("high", type=float,
-					help="Upper end of the distribution")
+                    help="Upper end of the distribution")
 parser.add_argument('nbins', type=int,
-					help="Number of histogram bins")
+                    help="Number of histogram bins")
 parser.add_argument('--verbose', type=bool, help="Show progress")
 parser.add_argument('--name', type=str, default="Parameter", help="Parameter name (for plot)")
 
@@ -67,17 +67,20 @@ print("fitting histogram model...")
 param_names = ['bin%d' % (i+1) for i in range(ndim)]
 
 def likelihood(params):
-	return np.log((binned_data * params).sum(axis=1) / Nsamples * ndim + 1e-300).sum()
+    """Histogram model"""
+    return np.log(np.dot(binned_data, params) / Nsamples + 1e-300).sum()
 
 def transform_dirichlet(quantiles):
+    """Histogram distribution priors"""
     # https://en.wikipedia.org/wiki/Dirichlet_distribution#Random_number_generation
     # first inverse transform sample from Gamma(alpha=1,beta=1), which is Exponential(1)
     gamma_quantiles = -np.log(quantiles)
     # dirichlet variables
     return gamma_quantiles / gamma_quantiles.sum()
 
-sampler = ultranest.ReactiveNestedSampler(param_names, likelihood, transform_dirichlet, 
-	log_dir=filename + '_out_flex%d' % ndim, resume=True)
+sampler = ultranest.ReactiveNestedSampler(
+    param_names, likelihood, transform_dirichlet,
+    log_dir=filename + '_out_flex%d' % ndim, resume=True)
 sampler.stepsampler = ultranest.stepsampler.RegionBallSliceSampler(40, region_filter=False)
 result = sampler.run(frac_remain=0.5, viz_callback=viz_callback)
 sampler.print_results()
@@ -87,49 +90,71 @@ print("fitting gaussian model...")
 
 gparam_names = ['mean', 'std']
 
+def normal_pdf(x, mean, std):
+    """Same as scipy.stats.norm(norm, std).pdf(x), but faster."""
+    return np.exp(-0.5 * ((x - mean) / std)**2) / (std * (2 * np.pi)**0.5)
+
 def glikelihood(params):
-	mean, std = params
-	return np.log(scipy.stats.norm(mean, std).pdf(data).mean(axis=1) + 1e-300).sum()
+    """Gaussian sample distribution"""
+    mean, std = params
+    return np.log(normal_pdf(data, mean, std).mean(axis=1) + 1e-300).sum()
 
 def gtransform(cube):
-	params = cube.copy()
-	params[0] = 3 * (maxval - minval) * cube[0] + minval
-	params[1] = cube[1] * (maxval - minval) * 3
-	return params
+    """Gaussian sample distribution priors"""
+    params = cube.copy()
+    params[0] = 3 * (maxval - minval) * cube[0] + minval
+    params[1] = cube[1] * (maxval - minval) * 3
+    return params
 
-gsampler = ultranest.ReactiveNestedSampler(gparam_names, glikelihood, gtransform, 
-	log_dir=filename + '_out_gauss', resume=True, vectorized=False)
+gsampler = ultranest.ReactiveNestedSampler(
+    gparam_names, glikelihood, gtransform,
+    log_dir=filename + '_out_gauss', resume=True)
 gresult = gsampler.run(frac_remain=0.5, viz_callback=viz_callback)
 gsampler.print_results()
 gsampler.plot()
 
 print("plotting results ...")
 
+plt.figure(figsize=(5,3))
 from ultranest.plot import PredictionBand
 
+lo_data = np.quantile(binned_data, 0.15865525393145707, axis=0)
+mid_data = np.quantile(binned_data, 0.5, axis=0)
+hi_data = np.quantile(binned_data, 0.8413447460685429, axis=0)
+
 plt.errorbar(
-	x=(bins_hi+bins_lo)/2,
-	xerr=(bins_hi-bins_lo)/2,
-	y=binned_data.mean(axis=0) / Nsamples / (bins_hi-bins_lo),
-	yerr=binned_data.std(axis=0) / Nsamples / (bins_hi-bins_lo),
-	linestyle=' ', color='lightgray',
-	label='Averaged Posteriors')
+    x=(bins_hi+bins_lo)/2,
+    xerr=(bins_hi-bins_lo)/2,
+    y=mid_data / Nsamples / (bins_hi-bins_lo),
+    yerr=[
+        (mid_data - lo_data) / Nsamples / (bins_hi-bins_lo), 
+        (hi_data - mid_data) / Nsamples / (bins_hi-bins_lo)
+    ],
+    linestyle=' ', color='lightgray',
+    label='Averaged Posteriors')
 
 x = np.linspace(minval, maxval, 400)
 band = PredictionBand(x)
 
 for mean, std in gresult['samples']:
-	band.add(scipy.stats.norm(mean, std).pdf(x))
+    band.add(normal_pdf(x, mean, std))
 band.line(color='r', label='Gaussian model')
 band.shade(alpha=0.5, color='r')
 
+lo_hist = np.quantile(result['samples'], 0.15865525393145707, axis=0)
+mid_hist = np.quantile(result['samples'], 0.5, axis=0)
+hi_hist = np.quantile(result['samples'], 0.8413447460685429, axis=0)
+
 plt.errorbar(
-	x=(bins_hi+bins_lo)/2,
-	xerr=(bins_hi-bins_lo)/2,
-	y=result['samples'].mean(axis=0) / (bins_hi-bins_lo),
-	yerr=result['samples'].std(axis=0) / (bins_hi-bins_lo),
-	marker='o', linestyle=' ', color='k',
-	label='Histogram model')
+    x=(bins_hi+bins_lo)/2,
+    xerr=(bins_hi-bins_lo)/2,
+    y=result['samples'].mean(axis=0) / (bins_hi-bins_lo),
+    yerr=[
+        (mid_hist - lo_hist) / (bins_hi-bins_lo), 
+        (hi_hist - mid_hist) / (bins_hi-bins_lo)
+    ],
+    marker='o', linestyle=' ', color='k',
+    label='Histogram model', capsize=2)
 
 plt.xlabel(args.name)
 plt.ylabel('Probability density')
