@@ -33,7 +33,7 @@ class HelpfulParser(argparse.ArgumentParser):
 
 parser = HelpfulParser(description=__doc__,
 	epilog="""Johannes Buchner (C) 2020 <johannes.buchner.acad@gmx.com>""",
-	formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	formatter_class=argparse.RawTextHelpFormatter)
 
 parser.add_argument('filename', type=str, 
                     help="Filename containing posterior samples, one object per line")
@@ -41,7 +41,7 @@ parser.add_argument("low", type=float,
 					help="Lower end of the distribution")
 parser.add_argument("high", type=float,
 					help="Upper end of the distribution")
-parser.add_argument('nbins', type=int, default=10,
+parser.add_argument('nbins', type=int,
 					help="Number of histogram bins")
 parser.add_argument('--verbose', type=bool, help="Show progress")
 parser.add_argument('--name', type=str, default="Parameter", help="Parameter name (for plot)")
