@@ -39,39 +39,6 @@ The output is visualised in a publication-ready plot.
 Synopsis of the program::
 
 	$ python3 posteriorstacker.py --help
-	usage: posteriorstacker.py [-h] [--verbose VERBOSE] [--name NAME]
-	                           filename low high nbins
-	
-	Posterior stacking tool.
-	
-	Johannes Buchner (C) 2020-2021
-	
-	Given posterior distributions of some parameter from many objects,
-	computes the sample distribution, using a simple hierarchical model.
-	
-	The method is described in Baronchelli, Nandra & Buchner (2020)
-	https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.5284B/abstract
-	Two computations are performed with this tool:
-	
-	- Gaussian model (as in the paper)
-	- Histogram model (using a Dirichlet prior distribution)
-	
-	The histogram model is non-parametric and more flexible.
-	Both models are computed using UltraNest.
-	The output is plotted.
-	
-	positional arguments:
-	  filename           Filename containing posterior samples, one object per line
-	  low                Lower end of the distribution
-	  high               Upper end of the distribution
-	  nbins              Number of histogram bins
-	
-	optional arguments:
-	  -h, --help         show this help message and exit
-	  --verbose VERBOSE  Show progress
-	  --name NAME        Parameter name (for plot)
-	
-	Johannes Buchner (C) 2020 <johannes.buchner.acad@gmx.com>
 
 Licence
 --------
@@ -129,58 +96,6 @@ Running PosteriorStacker
 We run the script with a range limit of +-100 km/s::
 
 	$ python3 posteriorstacker.py posteriorsamples.txt -80 +80 11 --name="Velocity [km/s]"
-	fitting histogram model...
-	[ultranest] Resuming from 2252 stored points
-	[ultranest] Explored until L=-1e+01  
-	[ultranest] Likelihood function evaluations: 96583
-	[ultranest] Writing samples and results to disk ...
-	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -20.48 +- 0.0688
-	[ultranest] Effective samples strategy satisfied (ESS = 791.9, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.10 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.14, need <0.5)
-	[ultranest]   logZ error budget: single: 0.07 bs:0.07 tail:0.41 total:0.41 required:<0.50
-	[ultranest] done iterating.
-	
-	logZ = -20.477 +- 0.418
-	  single instance: logZ = -20.477 +- 0.074
-	  bootstrapped   : logZ = -20.484 +- 0.105
-	  tail           : logZ = +- 0.405
-	insert order U test : converged: True correlation: inf iterations
-	
-	    bin1                0.044 +- 0.042
-	    bin2                0.053 +- 0.051
-	    bin3                0.066 +- 0.058
-	    bin4                0.065 +- 0.058
-	    bin5                0.103 +- 0.086
-	    bin6                0.31 +- 0.13
-	    bin7                0.16 +- 0.10
-	    bin8                0.054 +- 0.051
-	    bin9                0.049 +- 0.046
-	    bin10               0.047 +- 0.043
-	    bin11               0.048 +- 0.044
-	fitting gaussian model...
-	[ultranest] Resuming from 3697 stored points
-	[ultranest] Explored until L=-4e+01  
-	[ultranest] Likelihood function evaluations: 4706
-	[ultranest] Writing samples and results to disk ...
-	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -47.66 +- 0.1163
-	[ultranest] Effective samples strategy satisfied (ESS = 1017.5, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.07 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.34, need <0.5)
-	[ultranest]   logZ error budget: single: 0.13 bs:0.12 tail:0.41 total:0.42 required:<0.50
-	[ultranest] done iterating.
-	
-	logZ = -47.643 +- 0.471
-	  single instance: logZ = -47.643 +- 0.128
-	  bootstrapped   : logZ = -47.657 +- 0.240
-	  tail           : logZ = +- 0.405
-	insert order U test : converged: True correlation: inf iterations
-	
-	    mean                -0.4 +- 4.9
-	    std                 11.7 +- 5.3
-	plotting results ...
 
 Notice the parameters of the fitted gaussian distribution above.
 The standard deviation is quite small (which was the point of the original paper).
@@ -207,14 +122,8 @@ This is not a statistically meaningful procedure,
 but it can give you ideas what models 
 you may want to try for the sample distribution.
 
-
-Here are the output files::
-
-	$ ls -d posteriorsamples.txt_out*
-	posteriorsamples.txt_out_flex10
-	posteriorsamples.txt_out_flex11
-	posteriorsamples.txt_out_gauss
-	posteriorsamples.txt_out.pdf
+Output files
+------------
 
 * posteriorsamples.txt_out.pdf contains a plot, 
 * posteriorsamples.txt_out_gauss contain the ultranest analyses output assuming a Gaussian distribution.
