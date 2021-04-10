@@ -99,12 +99,6 @@ def glikelihood(params):
     mean, std = params
     return np.log(normal_pdf(data, mean, std).mean(axis=1) + 1e-300).sum()
 
-def glikelihood_numstable(params):
-    """Gaussian sample distribution"""
-    mean, std = params
-    i = np.random.randint(0, Nsamples, size=Nsamples)
-    return np.log(normal_pdf(data[:,i], mean, std).mean(axis=1) + 1e-300).sum()
-
 def gtransform(cube):
     """Gaussian sample distribution priors"""
     params = cube.copy()
@@ -117,9 +111,21 @@ gsampler = ultranest.ReactiveNestedSampler(
     log_dir=filename + '_out_gauss', resume=True)
 gresult = gsampler.run(frac_remain=0.5, viz_callback=viz_callback)
 gsampler.print_results()
-gsampler.plot()
+
+
+avg_mean, avg_std = gresult['samples'].mean(axis=1)
+N_resolved = np.logical_and(data > avg_mean - 5 * avg_std, data < avg_mean + 5 * avg_std).sum(axis=1)
+import warnings
+N_undersampled = (N_resolved < 20).sum()
+if N_undersampled > 0:
+    warnings.warn("std may be over-estimated: too few samples to resolve the distribution in %d objects." % N_undersampled)
+
+print()
+print("Note: Vary the number of samples to check numerical stability.")
 
 print("plotting results ...")
+gsampler.plot()
+
 
 plt.figure(figsize=(5,3))
 from ultranest.plot import PredictionBand
@@ -141,15 +147,6 @@ plt.errorbar(
 
 x = np.linspace(minval, maxval, 400)
 band = PredictionBand(x)
-
-avg_mean = np.median(gresult['samples'][:,0])
-avg_std = np.percentile(gresult['samples'][:,1], 10)
-N_resolved = np.logical_and(data > avg_mean - 5 * avg_std, data < avg_mean + 5 * avg_std).sum(axis=1)
-import warnings
-N_undersampled = (N_resolved < 20).sum()
-print(N_undersampled, avg_mean, avg_std, np.unique(N_resolved, return_counts=True))
-if N_undersampled > 0:
-    warnings.warn("std may be over-estimated: too few samples to resolve the distribution in %d objects." % N_undersampled)
 
 for mean, std in gresult['samples']:
     band.add(normal_pdf(x, mean, std))
