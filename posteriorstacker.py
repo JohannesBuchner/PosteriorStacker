@@ -111,9 +111,13 @@ gsampler = ultranest.ReactiveNestedSampler(
     log_dir=filename + '_out_gauss', resume=True)
 gresult = gsampler.run(frac_remain=0.5, viz_callback=viz_callback)
 gsampler.print_results()
-gsampler.plot()
+
+print()
+print("Note: Vary the number of samples to check numerical stability.")
 
 print("plotting results ...")
+gsampler.plot()
+
 
 plt.figure(figsize=(5,3))
 from ultranest.plot import PredictionBand
