@@ -113,7 +113,7 @@ gresult = gsampler.run(frac_remain=0.5, viz_callback=viz_callback)
 gsampler.print_results()
 
 
-avg_mean, avg_std = gresult['samples'].mean(axis=1)
+avg_mean, avg_std = gresult['samples'].mean(axis=0)
 N_resolved = np.logical_and(data > avg_mean - 5 * avg_std, data < avg_mean + 5 * avg_std).sum(axis=1)
 import warnings
 N_undersampled = (N_resolved < 20).sum()
@@ -121,7 +121,7 @@ if N_undersampled > 0:
     warnings.warn("std may be over-estimated: too few samples to resolve the distribution in %d objects." % N_undersampled)
 
 print()
-print("Note: Vary the number of samples to check numerical stability.")
+print("Vary the number of samples to check numerical stability!")
 
 print("plotting results ...")
 gsampler.plot()
