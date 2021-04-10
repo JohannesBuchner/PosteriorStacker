@@ -70,12 +70,6 @@ def likelihood(params):
     """Histogram model"""
     return np.log(np.dot(binned_data, params) / Nsamples + 1e-300).sum()
 
-def likelihood_numstable(params):
-    """Histogram model"""
-    # leave-one-out-sum
-    stablesum = (np.dot(binned_data, params).reshape((-1, 1)) - binned_data * params.reshape((1, -1))).mean(axis=1)
-    return np.log(stablesum / Nsamples + 1e-300).sum()
-
 def transform_dirichlet(quantiles):
     """Histogram distribution priors"""
     # https://en.wikipedia.org/wiki/Dirichlet_distribution#Random_number_generation
@@ -85,7 +79,7 @@ def transform_dirichlet(quantiles):
     return gamma_quantiles / gamma_quantiles.sum()
 
 sampler = ultranest.ReactiveNestedSampler(
-    param_names, likelihood_numstable, transform_dirichlet,
+    param_names, likelihood, transform_dirichlet,
     log_dir=filename + '_out_flex%d' % ndim, resume=True)
 sampler.stepsampler = ultranest.stepsampler.RegionBallSliceSampler(40, region_filter=False)
 result = sampler.run(frac_remain=0.5, viz_callback=viz_callback)
@@ -108,11 +102,8 @@ def glikelihood(params):
 def glikelihood_numstable(params):
     """Gaussian sample distribution"""
     mean, std = params
-    prob = normal_pdf(data, mean, std)
-    # leave-one-out, then average probablities
-    stableprob = (prob.sum(axis=1).reshape((-1, 1)) - prob).mean(axis=1)
-    assert stableprob.shape == (Nobj,)
-    return np.log(stableprob + 1e-300).sum()
+    i = np.random.randint(0, Nsamples, size=Nsamples)
+    return np.log(normal_pdf(data[:,i], mean, std).mean(axis=1) + 1e-300).sum()
 
 def gtransform(cube):
     """Gaussian sample distribution priors"""
@@ -122,7 +113,7 @@ def gtransform(cube):
     return params
 
 gsampler = ultranest.ReactiveNestedSampler(
-    gparam_names, glikelihood_numstable, gtransform,
+    gparam_names, glikelihood, gtransform,
     log_dir=filename + '_out_gauss', resume=True)
 gresult = gsampler.run(frac_remain=0.5, viz_callback=viz_callback)
 gsampler.print_results()
@@ -150,6 +141,15 @@ plt.errorbar(
 
 x = np.linspace(minval, maxval, 400)
 band = PredictionBand(x)
+
+avg_mean = np.median(gresult['samples'][:,0])
+avg_std = np.percentile(gresult['samples'][:,1], 10)
+N_resolved = np.logical_and(data > avg_mean - 5 * avg_std, data < avg_mean + 5 * avg_std).sum(axis=1)
+import warnings
+N_undersampled = (N_resolved < 20).sum()
+print(N_undersampled, avg_mean, avg_std, np.unique(N_resolved, return_counts=True))
+if N_undersampled > 0:
+    warnings.warn("std may be over-estimated: too few samples to resolve the distribution in %d objects." % N_undersampled)
 
 for mean, std in gresult['samples']:
     band.add(normal_pdf(x, mean, std))
