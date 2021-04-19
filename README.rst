@@ -3,6 +3,11 @@ PosteriorStacker
 
 Combines Bayesian analyses from many datasets.
 
+* `Introduction <#introduction>`_
+* `Method <#method>`_
+* `Tutorial <#tutorial>`_
+* `Output plot <#visualising-the-results>`_ and files
+
 Introduction
 -------------------
 
