@@ -21,10 +21,12 @@ distributions from posterior distributions from a number of objects.
 Method
 -------------------
 
+.. image:: hbm.png
+
 The method is described in 
 `Baronchelli, Nandra & Buchner (2020) <https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.5284B/abstract>`_.
 
-The hierarchical Bayesian model models a Gaussian sample distribution
+The hierarchical Bayesian model (illustrated above) models a Gaussian sample distribution
 (with unknown mean and standard deviation). The per-object
 parameters are also unknown, but integrated out numerically using
 the posterior samples.
