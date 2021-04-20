@@ -26,18 +26,22 @@ distributions from posterior distributions from a number of objects.
 Method
 -------------------
 
-.. image:: hbm.png
-
 The method is described in 
 `Baronchelli, Nandra & Buchner (2020) <https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.5284B/abstract>`_.
 
-The hierarchical Bayesian model (illustrated above) models a Gaussian sample distribution
-(with unknown mean and standard deviation). The per-object
+.. image:: hbm.png
+
+The inputs are posterior samples of a single parameter,
+for a number of objects. These need to come from pre-existing analyses,
+under a flat parameter prior.
+
+The hierarchical Bayesian model (illustrated above) models the sample distribution
+as a Gaussian with unknown mean and standard deviation. The per-object
 parameters are also unknown, but integrated out numerically using
 the posterior samples.
 
 Additional to the Gaussian model (as in the paper), 
-a histogram model (using a Dirichlet prior distribution) is computed,
+a histogram model (using a flat Dirichlet prior distribution) is computed,
 which is non-parametric and more flexible.
 Both models are inferred using `UltraNest <https://johannesbuchner.github.io/UltraNest/>`_.
 
@@ -83,6 +87,13 @@ Synopsis of the program::
 Licence
 --------
 AGPLv3 (see COPYING file). Contact me if you need a different licence.
+
+Install
+--------
+
+Clone or download this repository. You need to install the 
+`ultranest <https://johannesbuchner.github.io/UltraNest/>`_
+python package (e.g., with pip).
 
 Tutorial
 =================================
@@ -139,54 +150,54 @@ We run the script with a range limit of +-100 km/s::
 	fitting histogram model...
 	[ultranest] Sampling 400 live points from prior ...
 	[ultranest] Explored until L=-1e+01  
-	[ultranest] Likelihood function evaluations: 112188
+	[ultranest] Likelihood function evaluations: 116919
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -20.61 +- 0.07064
-	[ultranest] Effective samples strategy satisfied (ESS = 642.9, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.45+-0.08 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.24, need <0.5)
-	[ultranest]   logZ error budget: single: 0.07 bs:0.07 tail:0.41 total:0.41 required:<0.50
+	[ultranest]   logZ = -20.69 +- 0.05305
+	[ultranest] Effective samples strategy satisfied (ESS = 737.9, need >400)
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.47+-0.08 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.12, need <0.5)
+	[ultranest]   logZ error budget: single: 0.07 bs:0.05 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -20.596 +- 0.417
-	  single instance: logZ = -20.596 +- 0.073
-	  bootstrapped   : logZ = -20.606 +- 0.098
+	logZ = -20.711 +- 0.422
+	  single instance: logZ = -20.711 +- 0.074
+	  bootstrapped   : logZ = -20.692 +- 0.119
 	  tail           : logZ = +- 0.405
-	insert order U test : converged: True correlation: inf iterations
+	insert order U test : converged: False correlation: 31.0 iterations
 	
-	    bin1                0.044 +- 0.045
-	    bin2                0.056 +- 0.051
-	    bin3                0.066 +- 0.058
-	    bin4                0.066 +- 0.061
-	    bin5                0.109 +- 0.086
-	    bin6                0.31 +- 0.14
-	    bin7                0.15 +- 0.10
-	    bin8                0.052 +- 0.052
-	    bin9                0.047 +- 0.046
-	    bin10               0.047 +- 0.045
-	    bin11               0.049 +- 0.047
+	    bin1                0.053 +- 0.046
+	    bin2                0.054 +- 0.052
+	    bin3                0.064 +- 0.057
+	    bin4                0.063 +- 0.057
+	    bin5                0.105 +- 0.086
+	    bin6                0.31 +- 0.13
+	    bin7                0.150 +- 0.099
+	    bin8                0.055 +- 0.050
+	    bin9                0.049 +- 0.045
+	    bin10               0.047 +- 0.048
+	    bin11               0.046 +- 0.045
 	fitting gaussian model...
 	[ultranest] Sampling 400 live points from prior ...
 	[ultranest] Explored until L=-4e+01  
-	[ultranest] Likelihood function evaluations: 4672
+	[ultranest] Likelihood function evaluations: 4521
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -47.61 +- 0.1173
-	[ultranest] Effective samples strategy satisfied (ESS = 1021.3, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.47+-0.07 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.26, need <0.5)
-	[ultranest]   logZ error budget: single: 0.13 bs:0.12 tail:0.41 total:0.42 required:<0.50
+	[ultranest]   logZ = -47.39 +- 0.08526
+	[ultranest] Effective samples strategy satisfied (ESS = 1040.0, need >400)
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.45+-0.05 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.16, need <0.5)
+	[ultranest]   logZ error budget: single: 0.12 bs:0.09 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -47.611 +- 0.484
-	  single instance: logZ = -47.611 +- 0.128
-	  bootstrapped   : logZ = -47.606 +- 0.264
+	logZ = -47.380 +- 0.434
+	  single instance: logZ = -47.380 +- 0.124
+	  bootstrapped   : logZ = -47.395 +- 0.156
 	  tail           : logZ = +- 0.405
-	insert order U test : converged: False correlation: 15.0 iterations
+	insert order U test : converged: False correlation: 20.0 iterations
 	
-	    mean                -0.5 +- 4.8
-	    std                 11.8 +- 5.4
+	    mean                -0.5 +- 5.0
+	    std                 12.0 +- 5.5
 	
 	Vary the number of samples to check numerical stability!
 	plotting results ...

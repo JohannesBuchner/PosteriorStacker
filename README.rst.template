@@ -26,18 +26,22 @@ distributions from posterior distributions from a number of objects.
 Method
 -------------------
 
-.. image:: hbm.png
-
 The method is described in 
 `Baronchelli, Nandra & Buchner (2020) <https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.5284B/abstract>`_.
 
-The hierarchical Bayesian model (illustrated above) models a Gaussian sample distribution
-(with unknown mean and standard deviation). The per-object
+.. image:: hbm.png
+
+The inputs are posterior samples of a single parameter,
+for a number of objects. These need to come from pre-existing analyses,
+under a flat parameter prior.
+
+The hierarchical Bayesian model (illustrated above) models the sample distribution
+as a Gaussian with unknown mean and standard deviation. The per-object
 parameters are also unknown, but integrated out numerically using
 the posterior samples.
 
 Additional to the Gaussian model (as in the paper), 
-a histogram model (using a Dirichlet prior distribution) is computed,
+a histogram model (using a flat Dirichlet prior distribution) is computed,
 which is non-parametric and more flexible.
 Both models are inferred using `UltraNest <https://johannesbuchner.github.io/UltraNest/>`_.
 
@@ -50,6 +54,13 @@ Synopsis of the program::
 Licence
 --------
 AGPLv3 (see COPYING file). Contact me if you need a different licence.
+
+Install
+--------
+
+Clone or download this repository. You need to install the 
+`ultranest <https://johannesbuchner.github.io/UltraNest/>`_
+python package (e.g., with pip).
 
 Tutorial
 =================================
