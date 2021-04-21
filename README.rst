@@ -26,7 +26,7 @@ distributions from posterior distributions from a number of objects.
 Method
 -------------------
 
-The method is described in 
+The method is described in Appendix A of
 `Baronchelli, Nandra & Buchner (2020) <https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.5284B/abstract>`_.
 
 .. image:: hbm.png
@@ -150,54 +150,54 @@ We run the script with a range limit of +-100 km/s::
 	fitting histogram model...
 	[ultranest] Sampling 400 live points from prior ...
 	[ultranest] Explored until L=-1e+01  
-	[ultranest] Likelihood function evaluations: 116919
+	[ultranest] Likelihood function evaluations: 114176
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -20.69 +- 0.05305
-	[ultranest] Effective samples strategy satisfied (ESS = 737.9, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.47+-0.08 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.12, need <0.5)
-	[ultranest]   logZ error budget: single: 0.07 bs:0.05 tail:0.41 total:0.41 required:<0.50
+	[ultranest]   logZ = -20.68 +- 0.06865
+	[ultranest] Effective samples strategy satisfied (ESS = 684.4, need >400)
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.08 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.14, need <0.5)
+	[ultranest]   logZ error budget: single: 0.07 bs:0.07 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -20.711 +- 0.422
-	  single instance: logZ = -20.711 +- 0.074
-	  bootstrapped   : logZ = -20.692 +- 0.119
+	logZ = -20.677 +- 0.424
+	  single instance: logZ = -20.677 +- 0.074
+	  bootstrapped   : logZ = -20.676 +- 0.123
 	  tail           : logZ = +- 0.405
-	insert order U test : converged: False correlation: 31.0 iterations
+	insert order U test : converged: False correlation: 377.0 iterations
 	
-	    bin1                0.053 +- 0.046
-	    bin2                0.054 +- 0.052
-	    bin3                0.064 +- 0.057
-	    bin4                0.063 +- 0.057
-	    bin5                0.105 +- 0.086
-	    bin6                0.31 +- 0.13
-	    bin7                0.150 +- 0.099
-	    bin8                0.055 +- 0.050
-	    bin9                0.049 +- 0.045
-	    bin10               0.047 +- 0.048
-	    bin11               0.046 +- 0.045
+	    bin1                0.051 +- 0.046
+	    bin2                0.052 +- 0.051
+	    bin3                0.065 +- 0.058
+	    bin4                0.062 +- 0.057
+	    bin5                0.108 +- 0.085
+	    bin6                0.31 +- 0.14
+	    bin7                0.16 +- 0.10
+	    bin8                0.051 +- 0.050
+	    bin9                0.047 +- 0.044
+	    bin10               0.048 +- 0.047
+	    bin11               0.047 +- 0.045
 	fitting gaussian model...
 	[ultranest] Sampling 400 live points from prior ...
 	[ultranest] Explored until L=-4e+01  
-	[ultranest] Likelihood function evaluations: 4521
+	[ultranest] Likelihood function evaluations: 4544
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -47.39 +- 0.08526
-	[ultranest] Effective samples strategy satisfied (ESS = 1040.0, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.45+-0.05 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.16, need <0.5)
-	[ultranest]   logZ error budget: single: 0.12 bs:0.09 tail:0.41 total:0.41 required:<0.50
+	[ultranest]   logZ = -47.33 +- 0.07996
+	[ultranest] Effective samples strategy satisfied (ESS = 1011.4, need >400)
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.07 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.17, need <0.5)
+	[ultranest]   logZ error budget: single: 0.13 bs:0.08 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -47.380 +- 0.434
-	  single instance: logZ = -47.380 +- 0.124
-	  bootstrapped   : logZ = -47.395 +- 0.156
+	logZ = -47.341 +- 0.440
+	  single instance: logZ = -47.341 +- 0.126
+	  bootstrapped   : logZ = -47.331 +- 0.173
 	  tail           : logZ = +- 0.405
-	insert order U test : converged: False correlation: 20.0 iterations
+	insert order U test : converged: False correlation: 13.0 iterations
 	
-	    mean                -0.5 +- 5.0
-	    std                 12.0 +- 5.5
+	    mean                -0.3 +- 4.7
+	    std                 11.6 +- 5.2
 	
 	Vary the number of samples to check numerical stability!
 	plotting results ...
