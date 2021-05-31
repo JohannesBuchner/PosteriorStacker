@@ -49,7 +49,7 @@ The output is visualised in a publication-ready plot.
 
 Synopsis of the program::
 
-	$ python3 posteriorstacker.py --help
+	$ posteriorstacker.py --help
 
 Licence
 --------
@@ -58,9 +58,18 @@ AGPLv3 (see COPYING file). Contact me if you need a different licence.
 Install
 --------
 
-Clone or download this repository. You need to install the 
-`ultranest <https://johannesbuchner.github.io/UltraNest/>`_
-python package (e.g., with pip).
+.. image:: https://img.shields.io/pypi/v/PosteriorStacker.svg
+        :target: https://pypi.python.org/pypi/PosteriorStacker
+
+.. image:: https://api.travis-ci.com/JohannesBuchner/PosteriorStacker.svg?branch=master&status=started
+        :target: https://travis-ci.com/github/JohannesBuchner/PosteriorStacker
+
+Install as usual::
+
+	pip install posteriorstacker
+
+This also installs the required `ultranest <https://johannesbuchner.github.io/UltraNest/>`_
+python package.
 
 Tutorial
 =================================
@@ -81,6 +90,10 @@ Preparing the inputs
 For generating the demo input files and plots, run::
 
 	$ python3 tutorial/gendata.py
+
+You can also import posterior points from ultranest output folders:
+
+	$ load_ultranest_outputs.py --help
 
 Visualise the data
 ----------------------
