@@ -9,7 +9,7 @@ with open("README.rst", "w") as fout:
 			print("running", line[2:])
 			fout.write(line)
 			with subprocess.Popen(
-					line[2:], shell=True, text=True,
+					line[2:], shell=True, universal_newlines=True,
 					stdout=subprocess.PIPE, stderr=subprocess.STDOUT) as p:
 				for line in p.stdout:
 					if "%" in line:
