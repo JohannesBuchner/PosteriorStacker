@@ -124,7 +124,7 @@ For generating the demo input files and plots, run::
 
 	$ python3 tutorial/gendata.py
 
-You can also import posterior points from ultranest output folders:
+You can also import posterior points from ultranest output folders::
 
 	$ load_ultranest_outputs.py --help
 	usage: load_ultranest_outputs.py [-h] [--samples SAMPLES] --parameter
@@ -181,56 +181,56 @@ We run the script with a range limit of +-100 km/s::
 
 	$ python3 posteriorstacker.py posteriorsamples.txt -80 +80 11 --name="Velocity [km/s]"
 	fitting histogram model...
-	[ultranest] Resuming from 2275 stored points
+	[ultranest] Sampling 400 live points from prior ...
 	[ultranest] Explored until L=-1e+01  
-	[ultranest] Likelihood function evaluations: 114547
+	[ultranest] Likelihood function evaluations: 112250
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -20.49 +- 0.0651
-	[ultranest] Effective samples strategy satisfied (ESS = 711.1, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.45+-0.06 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.11, need <0.5)
+	[ultranest]   logZ = -20.61 +- 0.06738
+	[ultranest] Effective samples strategy satisfied (ESS = 798.6, need >400)
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.08 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.12, need <0.5)
 	[ultranest]   logZ error budget: single: 0.07 bs:0.07 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -20.479 +- 0.416
-	  single instance: logZ = -20.479 +- 0.073
-	  bootstrapped   : logZ = -20.494 +- 0.092
-	  tail           : logZ = +- 0.406
-	insert order U test : converged: False correlation: 238.0 iterations
+	logZ = -20.609 +- 0.422
+	  single instance: logZ = -20.609 +- 0.073
+	  bootstrapped   : logZ = -20.607 +- 0.117
+	  tail           : logZ = +- 0.405
+	insert order U test : converged: False correlation: 5.0 iterations
 	
-	    bin1                0.056 +- 0.050
-	    bin2                0.054 +- 0.051
-	    bin3                0.058 +- 0.052
-	    bin4                0.063 +- 0.059
-	    bin5                0.095 +- 0.081
-	    bin6                0.33 +- 0.15
-	    bin7                0.15 +- 0.10
-	    bin8                0.050 +- 0.049
-	    bin9                0.046 +- 0.045
-	    bin10               0.047 +- 0.044
-	    bin11               0.048 +- 0.045
+	    bin1                0.045 +- 0.043
+	    bin2                0.058 +- 0.053
+	    bin3                0.063 +- 0.058
+	    bin4                0.065 +- 0.057
+	    bin5                0.111 +- 0.091
+	    bin6                0.30 +- 0.13
+	    bin7                0.16 +- 0.10
+	    bin8                0.054 +- 0.049
+	    bin9                0.049 +- 0.046
+	    bin10               0.047 +- 0.046
+	    bin11               0.050 +- 0.046
 	fitting gaussian model...
-	[ultranest] Resuming from 3581 stored points
+	[ultranest] Sampling 400 live points from prior ...
 	[ultranest] Explored until L=-4e+01  
-	[ultranest] Likelihood function evaluations: 4606
+	[ultranest] Likelihood function evaluations: 4519
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -47.3 +- 0.1114
-	[ultranest] Effective samples strategy satisfied (ESS = 1023.4, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.45+-0.08 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.25, need <0.5)
-	[ultranest]   logZ error budget: single: 0.12 bs:0.11 tail:0.41 total:0.42 required:<0.50
+	[ultranest]   logZ = -47.24 +- 0.07979
+	[ultranest] Effective samples strategy satisfied (ESS = 997.7, need >400)
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.06 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.18, need <0.5)
+	[ultranest]   logZ error budget: single: 0.13 bs:0.08 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -47.283 +- 0.454
-	  single instance: logZ = -47.283 +- 0.125
-	  bootstrapped   : logZ = -47.295 +- 0.204
-	  tail           : logZ = +- 0.406
-	insert order U test : converged: False correlation: 33.0 iterations
+	logZ = -47.263 +- 0.443
+	  single instance: logZ = -47.263 +- 0.126
+	  bootstrapped   : logZ = -47.243 +- 0.179
+	  tail           : logZ = +- 0.405
+	insert order U test : converged: False correlation: 2.0 iterations
 	
-	    mean                -0.5 +- 4.9
-	    std                 11.6 +- 5.2
+	    mean                -0.3 +- 4.6
+	    std                 11.6 +- 5.0
 	
 	Vary the number of samples to check numerical stability!
 	plotting results ...

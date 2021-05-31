@@ -91,7 +91,7 @@ For generating the demo input files and plots, run::
 
 	$ python3 tutorial/gendata.py
 
-You can also import posterior points from ultranest output folders:
+You can also import posterior points from ultranest output folders::
 
 	$ load_ultranest_outputs.py --help
 
