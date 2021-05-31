@@ -148,55 +148,55 @@ We run the script with a range limit of +-100 km/s::
 
 	$ python3 posteriorstacker.py posteriorsamples.txt -80 +80 11 --name="Velocity [km/s]"
 	fitting histogram model...
-	[ultranest] Sampling 400 live points from prior ...
+	[ultranest] Resuming from 2333 stored points
 	[ultranest] Explored until L=-1e+01  
 	[ultranest] Likelihood function evaluations: 114176
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -20.68 +- 0.06865
+	[ultranest]   logZ = -20.66 +- 0.07543
 	[ultranest] Effective samples strategy satisfied (ESS = 684.4, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.08 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.14, need <0.5)
-	[ultranest]   logZ error budget: single: 0.07 bs:0.07 tail:0.41 total:0.41 required:<0.50
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.09 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.21, need <0.5)
+	[ultranest]   logZ error budget: single: 0.07 bs:0.08 tail:0.41 total:0.41 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -20.677 +- 0.424
+	logZ = -20.677 +- 0.457
 	  single instance: logZ = -20.677 +- 0.074
-	  bootstrapped   : logZ = -20.676 +- 0.123
+	  bootstrapped   : logZ = -20.662 +- 0.211
 	  tail           : logZ = +- 0.405
 	insert order U test : converged: False correlation: 377.0 iterations
 	
-	    bin1                0.051 +- 0.046
-	    bin2                0.052 +- 0.051
-	    bin3                0.065 +- 0.058
-	    bin4                0.062 +- 0.057
-	    bin5                0.108 +- 0.085
+	    bin1                0.052 +- 0.046
+	    bin2                0.053 +- 0.053
+	    bin3                0.065 +- 0.060
+	    bin4                0.063 +- 0.057
+	    bin5                0.109 +- 0.085
 	    bin6                0.31 +- 0.14
 	    bin7                0.16 +- 0.10
-	    bin8                0.051 +- 0.050
-	    bin9                0.047 +- 0.044
-	    bin10               0.048 +- 0.047
-	    bin11               0.047 +- 0.045
+	    bin8                0.051 +- 0.051
+	    bin9                0.047 +- 0.043
+	    bin10               0.047 +- 0.046
+	    bin11               0.046 +- 0.045
 	fitting gaussian model...
-	[ultranest] Sampling 400 live points from prior ...
+	[ultranest] Resuming from 3579 stored points
 	[ultranest] Explored until L=-4e+01  
 	[ultranest] Likelihood function evaluations: 4544
 	[ultranest] Writing samples and results to disk ...
 	[ultranest] Writing samples and results to disk ... done
-	[ultranest]   logZ = -47.33 +- 0.07996
+	[ultranest]   logZ = -47.33 +- 0.0901
 	[ultranest] Effective samples strategy satisfied (ESS = 1011.4, need >400)
-	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.07 nat, need <0.50 nat)
-	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.17, need <0.5)
-	[ultranest]   logZ error budget: single: 0.13 bs:0.08 tail:0.41 total:0.41 required:<0.50
+	[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.06 nat, need <0.50 nat)
+	[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.20, need <0.5)
+	[ultranest]   logZ error budget: single: 0.13 bs:0.09 tail:0.41 total:0.42 required:<0.50
 	[ultranest] done iterating.
 	
-	logZ = -47.341 +- 0.440
+	logZ = -47.341 +- 0.453
 	  single instance: logZ = -47.341 +- 0.126
-	  bootstrapped   : logZ = -47.331 +- 0.173
+	  bootstrapped   : logZ = -47.332 +- 0.203
 	  tail           : logZ = +- 0.405
 	insert order U test : converged: False correlation: 13.0 iterations
 	
-	    mean                -0.3 +- 4.7
+	    mean                -0.2 +- 4.6
 	    std                 11.6 +- 5.2
 	
 	Vary the number of samples to check numerical stability!

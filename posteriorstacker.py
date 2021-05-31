@@ -25,7 +25,7 @@ import ultranest, ultranest.stepsampler
 import argparse
 import sys
 
-__version__ == '0.1.0'
+__version__ = '0.1.0'
 
 class HelpfulParser(argparse.ArgumentParser):
     def error(self, message):
