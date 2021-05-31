@@ -29,7 +29,7 @@ install:
   # Customise the testing environment
   # ---------------------------------
   - conda install --quiet --file conda-requirements.txt cython
-  - pip install coveralls
+  - pip install coveralls rst2html5
 
   # Summerise environment
   # ---------------------
