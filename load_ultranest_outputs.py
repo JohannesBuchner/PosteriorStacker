@@ -28,9 +28,10 @@ parser.add_argument('--verbose', '-v', help="Show progress", action='store_true'
 args = parser.parse_args()
 
 paramname = args.parameter
-print(paramname)
 num_samples = args.samples
 dirnames = args.paths
+
+print("columns: %s" % (pd.read_csv(dirnames[0] + 'chains/equal_weighted_post.txt', sep=' ').columns.tolist()))
 
 results = np.empty((len(dirnames), num_samples))
 
