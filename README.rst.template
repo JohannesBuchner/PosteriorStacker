@@ -61,8 +61,8 @@ Install
 .. image:: https://img.shields.io/pypi/v/PosteriorStacker.svg
         :target: https://pypi.python.org/pypi/PosteriorStacker
 
-.. image:: https://api.travis-ci.com/JohannesBuchner/PosteriorStacker.svg?branch=master&status=started
-        :target: https://travis-ci.com/github/JohannesBuchner/PosteriorStacker
+.. image:: https://travis-ci.com/JohannesBuchner/PosteriorStacker.svg?branch=main
+    :target: https://travis-ci.com/JohannesBuchner/PosteriorStacker
 
 Install as usual::
 
