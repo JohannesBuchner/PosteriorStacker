@@ -160,6 +160,7 @@ Output files
 * posteriorsamples.txt_out_gauss contain the ultranest analyses output assuming a Gaussian distribution.
 * posteriorsamples.txt_out_flexN contain the ultranest analyses output assuming a histogram model.
 * The directories include diagnostic plots, corner plots and posterior samples of the distribution parameters.
+* posteriorsamples.txt_hists.pdf shows the individual input distributions, and highlights the most informative ones.
 
 With these output files, you can:
 

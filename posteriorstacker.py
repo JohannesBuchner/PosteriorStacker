@@ -64,6 +64,24 @@ bins_hi = bins[1:]
 
 binned_data = np.array([np.histogram(row, bins=bins)[0] for row in data])
 
+# compute KL for each object:
+prior = (1. / ndim)
+density = (binned_data + 0.1) / ((binned_data + 0.1).sum(axis=1)).reshape((-1, 1))
+KL = (density * np.log2((density / prior))).sum(axis=1)
+for i in np.argsort(KL):
+    plt.plot(
+        bins[:-1], binned_data[i] / binned_data[i].sum(),
+        drawstyle='steps-pre',
+        alpha=0.25 if KL[i] < 2 else None,
+        color='gray' if KL[i] < 1 else 'k' if KL[i] < 2 else None,
+        label=None if KL[i] < 2 else i
+    )
+plt.xlabel(args.name)
+plt.ylabel('Probability density')
+plt.legend(loc='best', title='Input row', prop=dict(size=6))
+plt.savefig(filename + '_hists.pdf', bbox_inches='tight')
+plt.close()
+
 print("fitting histogram model...")
 
 param_names = ['bin%d' % (i+1) for i in range(ndim)]
@@ -136,6 +154,7 @@ lo_data = np.quantile(binned_data, 0.15865525393145707, axis=0)
 mid_data = np.quantile(binned_data, 0.5, axis=0)
 hi_data = np.quantile(binned_data, 0.8413447460685429, axis=0)
 
+"""
 plt.errorbar(
     x=(bins_hi+bins_lo)/2,
     xerr=(bins_hi-bins_lo)/2,
@@ -146,6 +165,7 @@ plt.errorbar(
     ],
     linestyle=' ', color='lightgray',
     label='Averaged Posteriors')
+"""
 
 x = np.linspace(minval, maxval, 400)
 band = PredictionBand(x)
