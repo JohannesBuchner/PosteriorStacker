@@ -29,7 +29,7 @@ test_requirements = ['pytest>=3', ]
 setup(
     author="Johannes Buchner",
     author_email='johannes.buchner.acad@gmx.com',
-    python_requires='>=3.5.*',
+    python_requires='>= 3.5',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
