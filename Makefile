@@ -39,7 +39,7 @@ lint: ## check style with flake8
 	flake8 snowline tests
 
 test: ## run tests quickly with the default Python
-	${PYTHON} tutorial/run.py
+	${PYTHON} -m coverage run tutorial/run.py
 	rst2html5 README.rst > README.html
 
 test-all: ## run tests on every Python version with tox
