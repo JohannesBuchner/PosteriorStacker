@@ -40,7 +40,7 @@ lint: ## check style with flake8
 
 test: ## run tests quickly with the default Python
 	${PYTHON} tutorial/run.py
-	rst2html5.py README.rst > README.html
+	rst2html5 README.rst > README.html
 
 test-all: ## run tests on every Python version with tox
 	tox
