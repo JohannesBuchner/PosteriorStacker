@@ -65,12 +65,11 @@ doc: ## generate Sphinx HTML documentation, including API docs
 	python3 tutorial/run.py && rst2html5.py README.rst > README.html
 
 release: dist ## package and upload a release
-	twine upload -s dist/*.tar.gz
+	twine upload dist/*.tar.gz
 
 dist: clean ## builds source and wheel package
-	$(PYTHON) setup.py sdist
-	$(PYTHON) setup.py bdist_wheel
+	$(PYTHON) -m build
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
-	$(PYTHON) setup.py install
+	$(PYTHON) -m pip install .
