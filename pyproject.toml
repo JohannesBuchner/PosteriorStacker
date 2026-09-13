@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "posteriorstacker"
-version = "0.6.3"
+version = "0.6.4"
 description = "Combine Bayesian analyses from many datasets. Easy sample parameter distributions."
 readme = {file = "README.rst", content-type = "text/x-rst"}
 license = {text = "GNU General Public License v3"}
@@ -48,7 +48,7 @@ Documentation = "https://github.com/JohannesBuchner/PosteriorStacker"
 "load_ultranest_outputs.py" = "load_ultranest_outputs:main"
 
 [tool.bumpversion]
-current_version = "0.6.3"
+current_version = "0.6.4"
 commit = true
 tag = true
 

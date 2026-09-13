@@ -26,7 +26,7 @@ import argparse
 import sys
 import scipy.stats
 
-__version__ = '0.6.3'
+__version__ = '0.6.4'
 
 class HelpfulParser(argparse.ArgumentParser):
     def error(self, message):
