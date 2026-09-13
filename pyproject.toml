@@ -38,8 +38,8 @@ Source = "https://github.com/JohannesBuchner/PosteriorStacker"
 Documentation = "https://github.com/JohannesBuchner/PosteriorStacker"
 
 [project.scripts]
-posteriorstacker.py = "posteriorstacker:main"
-load_ultranest_outputs.py = "load_ultranest_outputs:main"
+"posteriorstacker.py" = "posteriorstacker:main"
+"load_ultranest_outputs.py" = "load_ultranest_outputs:main"
 
 [tool.pytest.ini_options]
 collect_ignore = "['setup.py']"
