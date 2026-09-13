@@ -35,6 +35,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "rst2html5",
+    "coverage",
 ]
 
 [project.urls]
