@@ -2,6 +2,44 @@
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "posteriorstacker"
+version = "0.6.2"
+description = "Combine Bayesian analyses from many datasets. Easy sample parameter distributions."
+readme = {file = "README.rst", content-type = "text/x-rst"}
+license = {text = "GNU General Public License v3"}
+authors = [
+    {name = "Johannes Buchner", email = "johannes.buchner.acad@gmx.com"}
+]
+keywords = ["posteriorstacker"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+requires-python = ">=3.5"
+dependencies = [
+    "numpy",
+    "scipy",
+    "ultranest",
+    "matplotlib",
+    "pandas",
+]
+
+[project.urls]
+Homepage = "https://github.com/JohannesBuchner/PosteriorStacker"
+Source = "https://github.com/JohannesBuchner/PosteriorStacker"
+Documentation = "https://github.com/JohannesBuchner/PosteriorStacker"
+
+[tool.setuptools]
+scripts = ["posteriorstacker.py", "load_ultranest_outputs.py"]
+
 [tool.pytest.ini_options]
 collect_ignore = "['setup.py']"
 
@@ -11,7 +49,17 @@ ignore = "W191,W291,W293,E231,E225"
 max-line-length = 160
 statistics = false
 
-[project.urls]
-Homepage = "https://github.com/JohannesBuchner/PosteriorStacker"
-Source = "https://github.com/JohannesBuchner/PosteriorStacker"
-Documentation = "https://github.com/JohannesBuchner/PosteriorStacker"
+[tool.bumpversion]
+current_version = "0.6.2"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "setup.py"
+search = "version='{current_version}'"
+replace = "version='{new_version}'"
+
+[[tool.bumpversion.files]]
+filename = "posteriorstacker.py"
+search = "__version__ = '{current_version}'"
+replace = "__version__ = '{new_version}'"
