@@ -16,3 +16,7 @@ ignore = "W191,W291,W293,E231,E225"
 max-line-length = 160
 statistics = false
 
+[project.urls]
+Homepage = "https://github.com/JohannesBuchner/PosteriorStacker"
+Source = "https://github.com/JohannesBuchner/PosteriorStacker"
+Documentation = "https://github.com/JohannesBuchner/PosteriorStacker"
