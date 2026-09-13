@@ -53,7 +53,7 @@ commit = true
 tag = true
 
 [[tool.bumpversion.files]]
-filename = "setup.py"
+filename = "pyproject.toml"
 search = "version = \"{current_version}\""
 replace = "version = \"{new_version}\""
 
