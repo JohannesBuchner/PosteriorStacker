@@ -39,8 +39,8 @@ lint: ## check style with flake8
 	flake8 snowline tests
 
 test: ## run tests quickly with the default Python
-	${PYTHON} tutorial/run.py
-	rst2html5.py README.rst > README.html
+	${PYTHON} -m coverage run tutorial/run.py
+	rst2html5 README.rst > README.html
 
 test-all: ## run tests on every Python version with tox
 	tox
@@ -56,7 +56,7 @@ show: flatdist.txt.gz_out_gauss/plots/corner.pdf
 	xdg-open $^
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source snowline -m pytest
+	coverage run --source PosteriorStacker ${PYTHON} tutorial/run.py
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
