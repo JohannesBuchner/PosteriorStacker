@@ -56,7 +56,7 @@ show: flatdist.txt.gz_out_gauss/plots/corner.pdf
 	xdg-open $^
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source snowline -m pytest
+	coverage run --source PosteriorStacker ${PYTHON} tutorial/run.py
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
