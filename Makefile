@@ -35,8 +35,9 @@ clean-test: ## remove test and coverage artifacts
 clean-doc:
 	rm -rf data.txt posteriorsamples.txt* README.html posteriors_x1.txt.gz 
 
-lint: ## check style with flake8
-	flake8 snowline tests
+lint: ## check style with flake8 and pycodestyle
+	flake8 posteriorstacker.py
+	pycodestyle posteriorstacker.py
 
 test: ## run tests quickly with the default Python
 	${PYTHON} -m coverage run tutorial/run.py

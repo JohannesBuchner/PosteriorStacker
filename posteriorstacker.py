@@ -34,8 +34,8 @@ class HelpfulParser(argparse.ArgumentParser):
         sys.exit(2)
 
 parser = HelpfulParser(description=__doc__,
-    epilog="""Johannes Buchner (C) 2020-2021 <johannes.buchner.acad@gmx.com>""",
-    formatter_class=argparse.RawTextHelpFormatter)
+                       epilog="""Johannes Buchner (C) 2020-2021 <johannes.buchner.acad@gmx.com>""",
+                       formatter_class=argparse.RawTextHelpFormatter)
 
 parser.add_argument('filename', type=str,
                     help="Filename containing posterior samples, one object per line")
